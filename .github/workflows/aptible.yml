@@ -1,0 +1,21 @@
+name: aptible
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Deploy to Aptible
+      uses: aptible/aptible-deploy-action@b95fa39c1988c9236a5fd793e25cd684f5040c39
+      with:
+        type: git
+        app: deploy-demo-app
+        environment: chaos-sandbox
+        username: ${{ secrets.APTIBLE_USERNAME }}
+        password: ${{ secrets.APTIBLE_PASSWORD }}
+
